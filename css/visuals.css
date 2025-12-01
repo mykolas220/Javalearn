@@ -1,0 +1,191 @@
+/* Visual Explanations */
+.visual-container {
+    background-color: #e0f7fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gate Animation (If Statements) */
+.gate-anim {
+    position: relative;
+    width: 200px;
+    height: 100px;
+}
+
+.gate-path {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+    transform: translateY(-50%);
+}
+
+.gate-door {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 10px;
+    height: 80px;
+    background-color: var(--primary-red);
+    transform: translateX(-50%);
+    transition: transform 0.5s;
+    z-index: 2;
+}
+
+.gate-label {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    color: var(--primary-red);
+}
+
+.gate-anim.open .gate-door {
+    transform: translateX(-50%) rotateY(90deg);
+    background-color: var(--primary-green);
+}
+
+.runner {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-blue);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    animation: runPath 2s infinite;
+    z-index: 3;
+}
+
+@keyframes runPath {
+    0% { left: 0; }
+    40% { left: 40%; } /* Stop at gate */
+    50% { left: 40%; } /* Wait */
+    100% { left: 100%; } /* Run through if open */
+}
+
+.visual-if-true .gate-door {
+    transform: translateX(-50%) scaleY(0); /* Open gate */
+    background-color: var(--primary-green);
+}
+
+.visual-if-true .runner {
+    animation: runThrough 2s infinite;
+}
+
+@keyframes runThrough {
+    0% { left: 0; }
+    100% { left: 100%; }
+}
+
+/* Variable Box Animation */
+.box-anim {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #ffc800;
+    border: 4px solid #e5b400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    box-shadow: 0 10px 0 rgba(0,0,0,0.1);
+}
+
+.box-label {
+    position: absolute;
+    top: -30px;
+    background: #333;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.box-content {
+    animation: dropIn 1s ease-out infinite alternate;
+}
+
+@keyframes dropIn {
+    0% { transform: translateY(-50px); opacity: 0; }
+    50% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Computer Speech Animation */
+.computer-anim {
+    width: 120px;
+    height: 90px;
+    background: #333;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 10px solid #222;
+}
+
+.computer-screen {
+    width: 100px;
+    height: 70px;
+    background: #1e1e1e;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -40px;
+    right: -60px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #333;
+    font-weight: bold;
+    animation: popUp 2s infinite;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 10px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #333 transparent;
+    display: block;
+    width: 0;
+}
+
+@keyframes popUp {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.code-line {
+    height: 4px;
+    background: #58cc02;
+    width: 80%;
+    margin: 5px auto;
+    border-radius: 2px;
+    animation: typeLine 1s infinite;
+}
+
+@keyframes typeLine {
+    0% { width: 0; }
+    100% { width: 80%; }
+}

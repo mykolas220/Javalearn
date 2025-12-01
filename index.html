@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javalearn - Learn Java</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/visuals.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="character-dance">
+                <img src="icon.png" alt="Logo" class="loading-logo">
+            </div>
+            <h1>Loading Javalearn...</h1>
+            <div class="loading-bar-container">
+                <div class="loading-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" style="display: none;">
+        
+        <!-- Mobile Sidebar Toggle -->
+        <button id="sidebar-toggle">→</button>
+
+        <!-- Sidebar / Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo-area">
+                <img src="icon.png" alt="Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+                <span class="logo-text">Javalearn</span>
+                <button class="close-sidebar-btn" id="sidebar-close">←</button>
+            </div>
+            <ul class="nav-links">
+                <li class="active" onclick="app.navigate('home')">
+                    <span class="icon">🏠</span> Learn
+                </li>
+                <li onclick="app.navigate('guidebook')">
+                    <span class="icon">📖</span> Guidebook
+                </li>
+                <li onclick="app.navigate('playground')">
+                    <span class="icon">💻</span> Playground
+                </li>
+                <li onclick="app.navigate('videos')">
+                    <span class="icon">📺</span> Videos
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Bar (Hearts, XP) -->
+            <header class="top-bar">
+                <div class="stat-item" id="flag-container">
+                    <span class="flag-icon">🇺🇸</span>
+                </div>
+                <div class="stat-item fire">
+                    <span class="icon">🔥</span> <span id="streak-count">0</span>
+                </div>
+                <div class="stat-item gems">
+                    <span class="icon">💎</span> <span id="gem-count">0</span>
+                </div>
+                <div class="stat-item hearts">
+                    <span class="icon">❤️</span> <span id="heart-count">5</span>
+                </div>
+            </header>
+
+            <!-- Home Screen (Lesson Path) -->
+            <div id="home-screen" class="screen active">
+                <div id="path-container">
+                    <!-- Chapters will be injected here -->
+                </div>
+            </div>
+
+            <!-- Lesson Screen -->
+            <div id="lesson-screen" class="screen">
+                <div class="lesson-header">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="lesson-progress"></div>
+                    </div>
+                    <div class="close-lesson" onclick="app.quitLesson()">✕</div>
+                </div>
+                
+                <div class="lesson-content" id="lesson-content-area">
+                    <!-- Dynamic Lesson Content -->
+                </div>
+
+                <div class="lesson-footer">
+                    <div class="feedback-area" id="feedback-area" style="display: none;">
+                        <div class="feedback-content">
+                            <div class="feedback-icon" id="feedback-icon"></div>
+                            <div class="feedback-text">
+                                <h3 id="feedback-title"></h3>
+                                <p id="feedback-message"></p>
+                            </div>
+                        </div>
+                        <button id="next-btn" class="action-btn">Continue</button>
+                    </div>
+                    <button id="check-btn" class="action-btn primary">Check</button>
+                </div>
+            </div>
+
+            <!-- Guidebook Screen -->
+            <div id="guidebook-screen" class="screen">
+                <h2>Java Guidebook</h2>
+                <div id="guidebook-content"></div>
+            </div>
+
+            <!-- Playground Screen -->
+            <div id="playground-screen" class="screen">
+                <h2>Code Playground</h2>
+                <div class="playground-container">
+                    <div class="editor-wrapper">
+                        <textarea id="playground-editor" spellcheck="false" placeholder="// Write your Java code here..."></textarea>
+                    </div>
+                    <div class="console-wrapper">
+                        <div class="console-header">Console Output</div>
+                        <div id="playground-console"></div>
+                        <button class="run-btn" onclick="app.runPlayground()">Run Code</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Videos Screen -->
+            <div id="videos-screen" class="screen">
+                <h2>Java Video Tutorials</h2>
+                <div id="videos-container" class="videos-grid">
+                    <!-- Videos will be injected here -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/lessons.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
