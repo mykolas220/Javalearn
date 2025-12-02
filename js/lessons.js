@@ -1,5 +1,5 @@
 
-// --- 1. Define Core Content (Kid-Friendly) ---
+// --- 1. Define Core Content (JavaScript) ---
 
 const coreChapters = [
     {
@@ -12,23 +12,42 @@ const coreChapters = [
                 steps: [
                     {
                         type: "theory",
-                        content: "Welcome to **Javalearn**! Let's talk to the computer.\n\nTo make the computer write words on the screen, we give it an instruction.\n\n**Key Symbols:**\n* `()` **Round Brackets**: We put our message inside these.\n* `;` **End Mark**: This tells the computer \"I am finished with this line\". It is like a period `.` in a book.\n\nInstruction: `System.out.println(\"Hello\");`"
+                        content: "Welcome to **JSlearn**! Let's talk to the computer using JavaScript.\n\nTo make the computer write words on the screen, we use `console.log`.\n\n**Key Symbols:**\n* `()` **Round Brackets**: We put our message inside these.\n* `;` **End Mark**: This tells the computer \"I am finished with this line\". (Optional in JS, but good practice!)\n\nInstruction: `console.log(\"Hello\");`"
                     },
                     {
                         type: "quiz",
-                        question: "Which symbol tells the computer the line is finished?",
-                        options: [".", ";", "}", ")"],
+                        question: "Which command writes to the console?",
+                        options: ["System.out.println", "console.log", "print", "write"],
                         correct: 1,
-                        explanation: "The semicolon `;` is the End Mark."
+                        explanation: "`console.log` is the standard way to print text in JavaScript."
                     },
                     {
                         type: "code",
-                        instruction: "Tell the computer to write \"Hello Javalearn\".",
-                        initial: "System.out.println(______",
-                        solution: "System.out.println(\"Hello Javalearn\");",
-                        fullSolution: "System.out.println(\"Hello Javalearn\");",
-                        explanation: "Put the text inside the brackets `(\"...\")` and end with `;`.",
-                        checkRegex: /System\.out\.println\s*\(\s*"Hello Javalearn"\s*\)\s*;/
+                        instruction: "Tell the computer to write \"Hello JS\".",
+                        initial: "console.log(______",
+                        solution: "console.log(\"Hello JS\");",
+                        fullSolution: "console.log(\"Hello JS\");",
+                        explanation: "Put the text inside the brackets `(\"...\")`.",
+                        checkRegex: /console\.log\s*\(\s*"Hello JS"\s*\)\s*;?/
+                    }
+                ]
+            },
+            {
+                id: "l1-1b",
+                title: "Comments",
+                steps: [
+                    {
+                        type: "theory",
+                        content: "Sometimes we want to leave notes for ourselves that the computer ignores.\n\nThese are called **Comments**.\n\n* `//` Single line comment\n* `/* ... */` Multi-line comment"
+                    },
+                    {
+                        type: "code",
+                        instruction: "Write a comment saying 'My Code'.",
+                        initial: "// ______",
+                        solution: "// My Code",
+                        fullSolution: "// My Code",
+                        explanation: "Start the line with `//`.",
+                        checkRegex: /\/\/\s*My Code/
                     }
                 ]
             },
@@ -38,23 +57,59 @@ const coreChapters = [
                 steps: [
                     {
                         type: "theory",
-                        content: "A **Variable** is just a **Box** with a name on it.\n\nIn Java, we must tell the computer what kind of box we want.\n\n**Types of Boxes:**\n* `int` (Integer): A box for whole numbers (like 1, 5, 100).\n* `String` (Text): A box for words (like \"Hello\"). Note the capital 'S'!\n* `boolean` (Boolean): A box for Yes/No (true/false).\n\nExample: `int age = 10;`"
+                        content: "A **Variable** is just a **Box** with a name on it.\n\nIn JavaScript, we use `let` or `const` to make a box.\n\n**Types of Boxes:**\n* `let`: A box you can change later.\n* `const`: A box you CANNOT change (Constant).\n\nExample: `let age = 10;`"
                     },
                     {
                         type: "quiz",
-                        question: "What type of box holds text?",
-                        options: ["int", "boolean", "String", "var"],
-                        correct: 2, 
-                        explanation: "`String` (with a capital S) is for Text."
+                        question: "Which keyword makes a variable you can change?",
+                        options: ["const", "let", "var", "int"],
+                        correct: 1, 
+                        explanation: "`let` allows you to change the value later. `const` does not."
                     },
                     {
                         type: "code",
-                        instruction: "Make a box named `xp` with the number 50 inside.",
+                        instruction: "Make a changeable box named `xp` with the number 50 inside.",
                         initial: "______ xp = 50;",
-                        solution: "int xp = 50;",
-                        fullSolution: "int xp = 50;",
-                        explanation: "Use `int` because 50 is a whole number.",
-                        checkRegex: /int\s+xp\s*=\s*50\s*;/
+                        solution: "let xp = 50;",
+                        fullSolution: "let xp = 50;",
+                        explanation: "Use `let` because we might want to change XP later.",
+                        checkRegex: /let\s+xp\s*=\s*50\s*;?/
+                    }
+                ]
+            },
+            {
+                id: "l1-2b",
+                title: "Math Time",
+                steps: [
+                    {
+                        type: "theory",
+                        content: "Computers are great at math!\n\n* `+` Add\n* `-` Subtract\n* `*` Multiply\n* `/` Divide\n\nExample: `let sum = 10 + 5;`"
+                    },
+                    {
+                        type: "code",
+                        instruction: "Calculate 10 times 10.",
+                        initial: "let result = 10 ______ 10;",
+                        solution: "*",
+                        fullSolution: "let result = 10 * 10;",
+                        explanation: "Use the `*` symbol for multiplication.",
+                        checkRegex: /let\s+result\s*=\s*10\s*\*\s*10\s*;?/
+                    }
+                ]
+            },
+            {
+                id: "l1-2c",
+                title: "True or False",
+                steps: [
+                    {
+                        type: "theory",
+                        content: "A **Boolean** is a value that can only be `true` or `false`.\n\nIt's like a light switch: On or Off.\n\n`let isGameRunning = true;`"
+                    },
+                    {
+                        type: "quiz",
+                        question: "What are the only two boolean values?",
+                        options: ["yes/no", "1/0", "true/false", "on/off"],
+                        correct: 2,
+                        explanation: "Booleans are strictly `true` or `false`."
                     }
                 ]
             },
@@ -64,23 +119,23 @@ const coreChapters = [
                 steps: [
                     {
                         type: "theory",
-                        content: "How do we put a Box inside a sentence?\n\nWe use the `+` sign to glue things together.\n\n`\"Score: \" + score`\n\nThis joins the text \"Score: \" with whatever is inside the `score` box."
+                        content: "How do we put a Box inside a sentence?\n\nWe can use the `+` sign, OR even better, **Template Literals** with backticks ` `.\n\n`let score = 10;`\n`console.log(\`Score: ${score}\`);`\n\nThe `${score}` grabs the value from the box!"
                     },
                     {
                         type: "quiz",
-                        question: "Which symbol glues text together?",
-                        options: ["-", "*", "+", "/"],
+                        question: "What symbol do we use for Template Literals?",
+                        options: ["'", "\"", "`", "."],
                         correct: 2, 
-                        explanation: "The `+` sign adds text together."
+                        explanation: "We use backticks (`) for template literals."
                     },
                     {
                         type: "code",
-                        instruction: "Write \"Level: \" combined with the `level` box.",
-                        initial: "int level = 5;\nSystem.out.println(______",
-                        solution: "\"Level: \" + level);",
-                        fullSolution: "int level = 5;\nSystem.out.println(\"Level: \" + level);",
-                        explanation: "Use `\"Level: \" + level` inside the brackets.",
-                        checkRegex: /System\.out\.println\s*\(\s*"Level:\s*"\s*\+\s*level\s*\)\s*;/
+                        instruction: "Use backticks to print \"Level: \" and the `level` variable.",
+                        initial: "let level = 5;\nconsole.log(______",
+                        solution: "`Level: ${level}`);",
+                        fullSolution: "let level = 5;\nconsole.log(`Level: ${level}`);",
+                        explanation: "Use backticks ` ` and put `${level}` inside.",
+                        checkRegex: /console\.log\s*\(\s*`Level:\s*\$\{\s*level\s*\}\s*`\s*\)\s*;?/
                     }
                 ]
             }
@@ -88,115 +143,117 @@ const coreChapters = [
     },
     {
         id: "chapter-2",
-        title: "Level 2: Loops",
+        title: "Level 2: Logic & Loops",
         lessons: [
             {
                 id: "l3-0",
-                title: "The Loop Toolbox",
+                title: "Making Decisions",
                 steps: [
                     {
                         type: "theory",
-                        content: "Welcome to the Loop Factory! Here are the tools we use to repeat things.\n\nWe will learn these commands:\n\n**1. for-each (The List Reader)**\n- `for (String toy : toyBox) { play(toy); }`\n\n**2. while (The Waiter)**\n- `while (isRaining) { useUmbrella(); }`\n\n**3. for (The Counter)**\n- `for (int i = 0; i < 10; i++) { jump(); }`\n\nSee? We have many ways to repeat actions!"
+                        content: "We use `if` to ask questions.\n\n**Comparison:**\n* `===` : Is it EXACTLY equal?\n* `!==` : Is it NOT equal?\n\nExample:\n`if (score === 100) { win(); }`"
                     },
                     {
                         type: "quiz",
-                        question: "Which loop is best for counting steps?",
-                        options: ["for-each", "while", "for", "The Pizza Loop"],
+                        question: "Which symbol checks if two things are equal?",
+                        options: ["=", "==", "===", "equals"],
                         correct: 2,
-                        explanation: "The 'for' loop is great for counting numbers like 1, 2, 3!"
+                        explanation: "`===` (Triple Equals) is the strict equality operator in JS."
+                    }
+                ]
+            },
+            {
+                id: "l3-0b",
+                title: "Else If",
+                steps: [
+                    {
+                        type: "theory",
+                        content: "What if the first check fails?\n\nUse `else if` to ask another question, or `else` for everything else.\n\n```javascript\nif (x > 10) {\n  // Big\n} else {\n  // Small\n}\n```"
+                    },
+                    {
+                        type: "code",
+                        instruction: "Add an else block.",
+                        initial: "if (win) {\n  play();\n} ______ {\n  stop();\n}",
+                        solution: "else",
+                        fullSolution: "if (win) {\n  play();\n} else {\n  stop();\n}",
+                        explanation: "Use `else` to handle the other case.",
+                        checkRegex: /else/
                     }
                 ]
             },
             {
                 id: "l3-1",
-                title: "What is a Loop?",
+                title: "The Loop Toolbox",
                 steps: [
                     {
                         type: "theory",
-                        content: "Imagine you have to wash 100 dishes.\n\nWould you write instructions like this?\n`washDish(1);`\n`washDish(2);`\n... all the way to 100?\n\nNO! That is boring and slow.\n\nYou would say: **\"For every dish in the pile, wash it.\"**\n\nThat is a **Loop**. It repeats an action for you automatically!"
+                        content: "Loops repeat actions.\n\n**1. for loop** (Counting)\n`for (let i = 0; i < 5; i++) { ... }`\n\n**2. for...of** (Lists)\n`for (const item of list) { ... }`\n\n**3. while** (Waiting)\n`while (running) { ... }`"
                     },
                     {
-                        type: "quiz",
-                        question: "Why do we use loops?",
-                        options: ["To make code slower", "To repeat actions easily", "To delete files", "To make colors"],
-                        correct: 1,
-                        explanation: "Loops let us repeat code without writing it over and over."
+                        type: "code",
+                        instruction: "Write a loop that counts from 0 to 4.",
+                        initial: "for (let i = 0; i < 5; i++) {\n    console.log(______);\n}",
+                        solution: "i",
+                        fullSolution: "for (let i = 0; i < 5; i++) {\n    console.log(i);\n}",
+                        explanation: "We want to print the number `i`.",
+                        checkRegex: /console\.log\s*\(\s*i\s*\)\s*;?/
+                    }
+                ]
+            },
+            {
+                id: "l3-1b",
+                title: "While Loops",
+                steps: [
+                    {
+                        type: "theory",
+                        content: "A `while` loop keeps running AS LONG AS the condition is true.\n\n**Warning:** If the condition never becomes false, it runs forever (Infinite Loop)!\n\n```javascript\nwhile (energy > 0) {\n  run();\n  energy--;\n}\n```"
+                    },
+                    {
+                        type: "code",
+                        instruction: "Create a while loop that runs while `active` is true.",
+                        initial: "______ (active) { }",
+                        solution: "while",
+                        fullSolution: "while (active) { }",
+                        explanation: "Use the `while` keyword.",
+                        checkRegex: /while\s*\(\s*active\s*\)/
                     }
                 ]
             },
             {
                 id: "l3-2",
-                title: "The 'for-each' Loop",
+                title: "Looping Lists",
                 steps: [
                     {
                         type: "theory",
-                        content: "The best loop for lists is the 'for-each' loop.\n\nIt means: \"For Each Item in a List\".\n\n**Structure:**\n`for (String item : list)`\n`{`\n`    // Do something with item`\n`}`\n\nIt grabs one item at a time, puts it in the box `item`, and runs your code."
+                        content: "To go through a list (Array), use `for...of`.\n\n`const fruits = ['Apple', 'Banana'];`\n`for (const fruit of fruits) { ... }`"
                     },
                     {
                         type: "code",
-                        instruction: "Write the start of a for-each loop.",
-                        initial: "for (String item ______ list)",
-                        solution: ":",
-                        fullSolution: "for (String item : list)",
-                        explanation: "We use a colon `:` to separate the item from the list.",
-                        checkRegex: /:/
+                        instruction: "Loop through the `names` list.",
+                        initial: "const names = ['A', 'B'];\nfor (const name ______ names) { }",
+                        solution: "of",
+                        fullSolution: "for (const name of names) { }",
+                        explanation: "Use the keyword `of`.",
+                        checkRegex: /for\s*\(\s*(const|let)\s+\w+\s+of\s+names\s*\)/
                     }
                 ]
             },
             {
-                id: "l3-3",
-                title: "Looping with Numbers",
+                id: "l3-2b",
+                title: "Break & Continue",
                 steps: [
                     {
                         type: "theory",
-                        content: "Sometimes we just want to count.\n\nWe use the standard `for` loop!\n\n`for (int i = 1; i <= 5; i++)`\n\nThis counts from 1 to 5.\n\nInside the loop, `i` will be 1, then 2, then 3..."
+                        content: "You can control loops with special words:\n\n* `break`: Stop the loop immediately.\n* `continue`: Skip this turn and go to the next one."
                     },
                     {
                         type: "code",
-                        instruction: "Write a loop that counts numbers.",
-                        initial: "for (int i = 1; i <= 5; i++) {\n    System.out.println(______);\n}",
-                        solution: "i",
-                        fullSolution: "for (int i = 1; i <= 5; i++) {\n    System.out.println(i);\n}",
-                        explanation: "We want to print the number `i`.",
-                        checkRegex: /System\.out\.println\s*\(\s*i\s*\)\s*;/
-                    }
-                ]
-            },
-            {
-                id: "l3-4",
-                title: "The 'while' Loop",
-                steps: [
-                    {
-                        type: "theory",
-                        content: "Another loop is `while`.\n\nIt runs **While** something is true.\n\n`while (energy > 0)`\n`{`\n`    run();`\n`}`\n\nIt keeps running until energy is 0. Be careful! If energy never goes down, it runs FOREVER!"
-                    },
-                    {
-                        type: "code",
-                        instruction: "Create a while loop that checks if `running` is true.",
-                        initial: "while (______) {\n    go();\n}",
-                        solution: "running",
-                        fullSolution: "while (running) {\n    go();\n}",
-                        explanation: "Just put the condition `running` inside the `()`.",
-                        checkRegex: /while\s*\(\s*running\s*\)/
-                    }
-                ]
-            },
-            {
-                id: "l3-5",
-                title: "Loop Practice",
-                steps: [
-                    {
-                        type: "theory",
-                        content: "Let's put it all together.\n\nYou have a list of names. You want to say Hello to everyone.\n\nUse a loop to go through `names`."
-                    },
-                    {
-                        type: "code",
-                        instruction: "Write a full loop to print each name.",
-                        initial: "String[] names = {\"A\", \"B\"};\n\n// Write loop here\n",
-                        solution: "for(String name : names) { System.out.println(name); }",
-                        fullSolution: "for(String name : names) {\n    System.out.println(name);\n}",
-                        explanation: "Use `for (String name : names)` and then `System.out.println(name)` inside `{}`.",
-                        checkRegex: /for\s*\(\s*String\s+\w+\s+:\s+names\s*\)\s*\{\s*System\.out\.println\s*\(\s*\w+\s*\)\s*;\s*\}/s
+                        instruction: "Stop the loop if x is 5.",
+                        initial: "if (x === 5) { ______; }",
+                        solution: "break",
+                        fullSolution: "if (x === 5) { break; }",
+                        explanation: "Use `break` to stop the loop.",
+                        checkRegex: /break\s*;?/
                     }
                 ]
             }
@@ -204,98 +261,238 @@ const coreChapters = [
     }
 ];
 
-// --- 2. Define Procedural Topics (Kid-Friendly) ---
+// --- 2. Define Procedural Topics (JavaScript) ---
 
 const proceduralTopics = [
     { 
-        name: "Arrays", 
-        keyword: "[]", 
-        kidExpl: "An Array is like a tray with many slots to hold things side-by-side.",
-        memoryTip: "Think of an egg carton holding eggs.",
-        codeTask: "Create an array of numbers named `nums` with 1, 2, and 3.",
-        codeTemplate: "int[] nums = {______};",
-        codeSolution: "int[] nums = {1, 2, 3};",
-        codeRegex: /int\s*\[\s*\]\s*nums\s*=\s*\{\s*1\s*,\s*2\s*,\s*3\s*\}\s*;/
+        name: "Functions", 
+        keyword: "function", 
+        kidExpl: "A Function is a set of instructions we can use again and again.",
+        memoryTip: "Like a recipe for a cake.",
+        codeTask: "Create a function named `jump`.",
+        codeTemplate: "______ jump() { }",
+        codeSolution: "function jump() { }",
+        codeRegex: /function\s+jump\s*\(\s*\)\s*\{\s*\}/
     },
     { 
-        name: "Methods", 
-        keyword: "void", 
-        kidExpl: "A Method is a shortcut. We give a name to a list of instructions.",
-        memoryTip: "Think of a magic spell word that does many things at once.",
-        codeTask: "Create a short method named `jump` that prints \"Jump!\".",
-        codeTemplate: "void jump() { ______ }",
-        codeSolution: "void jump() { System.out.println(\"Jump!\"); }",
-        codeRegex: /void\s+jump\s*\(\s*\)\s*\{\s*System\.out\.println\s*\(\s*"Jump!"\s*\)\s*;\s*\}/
+        name: "Arrow Functions", 
+        keyword: "=>", 
+        kidExpl: "A shorter way to write functions. It looks like an arrow!",
+        memoryTip: "Point to what you want to do.",
+        codeTask: "Make a constant `run` that is an arrow function.",
+        codeTemplate: "const run = () ______ { };",
+        codeSolution: "const run = () => { };",
+        codeRegex: /const\s+run\s*=\s*\(\s*\)\s*=>\s*\{\s*\}\s*;?/
+    },
+    { 
+        name: "Arrays", 
+        keyword: "[]", 
+        kidExpl: "An Array is a list of things.",
+        memoryTip: "Like a shopping list.",
+        codeTask: "Make a list of numbers.",
+        codeTemplate: "const nums = [1, 2, 3];",
+        codeSolution: "const nums = [1, 2, 3];",
+        codeRegex: /const\s+nums\s*=\s*\[\s*1\s*,\s*2\s*,\s*3\s*\]\s*;?/
+    },
+    { 
+        name: "Objects", 
+        keyword: "{}", 
+        kidExpl: "An Object describes a thing with properties (keys and values).",
+        memoryTip: "Like a character profile card.",
+        codeTask: "Create a player object.",
+        codeTemplate: "const player = { name: \"Hero\" };",
+        codeSolution: "const player = { name: \"Hero\" };",
+        codeRegex: /const\s+player\s*=\s*\{\s*name\s*:\s*"Hero"\s*\}\s*;?/
+    },
+    { 
+        name: "DOM", 
+        keyword: "document", 
+        kidExpl: "The DOM is the webpage itself. We can change it with code!",
+        memoryTip: "Document Object Model.",
+        codeTask: "Get an element by ID.",
+        codeTemplate: "document.getElementById(\"app\");",
+        codeSolution: "document.getElementById(\"app\");",
+        codeRegex: /document\.getElementById\s*\(\s*"app"\s*\)/
+    },
+    { 
+        name: "Events", 
+        keyword: "addEventListener", 
+        kidExpl: "Events are things that happen, like clicks. We 'listen' for them.",
+        memoryTip: "Like waiting for a doorbell.",
+        codeTask: "Listen for a click.",
+        codeTemplate: "btn.______( 'click', () => {} );",
+        codeSolution: "btn.addEventListener( 'click', () => {} );",
+        codeRegex: /btn\.addEventListener/
+    },
+    { 
+        name: "Promises", 
+        keyword: "then", 
+        kidExpl: "A Promise is for things that take time, like loading a file.",
+        memoryTip: "I promise to tell you when I'm done.",
+        codeTask: "Wait for a promise to finish.",
+        codeTemplate: "load().______(data => {});",
+        codeSolution: "load().then(data => {});",
+        codeRegex: /\.then\s*\(/
+    },
+    { 
+        name: "Async/Await", 
+        keyword: "async", 
+        kidExpl: "A cleaner way to handle Promises. It looks like normal code.",
+        memoryTip: "Async means 'not at the same time'.",
+        codeTask: "Make a function asynchronous.",
+        codeTemplate: "______ function load() {}",
+        codeSolution: "async function load() {}",
+        codeRegex: /async\s+function\s+load/
+    },
+    { 
+        name: "JSON", 
+        keyword: "JSON", 
+        kidExpl: "JSON is a way to send data as text.",
+        memoryTip: "JavaScript Object Notation.",
+        codeTask: "Turn an object into text.",
+        codeTemplate: "JSON.stringify(data);",
+        codeSolution: "JSON.stringify(data);",
+        codeRegex: /JSON\.stringify/
     },
     { 
         name: "Classes", 
         keyword: "class", 
-        kidExpl: "A Class is a blueprint. It tells the computer how to build something.",
-        memoryTip: "Think of a drawing of a robot before you build it.",
-        codeTask: "Define a class named `Robot`.",
-        codeTemplate: "______ Robot {\n}",
-        codeSolution: "class Robot {\n}",
-        codeRegex: /class\s+Robot/
+        kidExpl: "A Class is a blueprint for creating objects.",
+        memoryTip: "Like a blueprint for a house.",
+        codeTask: "Create a class named `Hero`.",
+        codeTemplate: "______ Hero { }",
+        codeSolution: "class Hero { }",
+        codeRegex: /class\s+Hero/
     },
     { 
-        name: "Inheritance", 
-        keyword: "extends", 
-        kidExpl: "Inheritance is when a child gets traits from a parent.",
-        memoryTip: "Like how a 'Car' is a type of 'Vehicle'.",
-        codeTask: "Make `Dog` inherit from `Animal`.",
-        codeTemplate: "class Dog ______ Animal {}",
-        codeSolution: "class Dog extends Animal {}",
-        codeRegex: /class\s+Dog\s+extends\s+Animal/
+        name: "Modules", 
+        keyword: "import", 
+        kidExpl: "Modules let us split code into different files.",
+        memoryTip: "Importing parts for a machine.",
+        codeTask: "Import `game` from `./game.js`.",
+        codeTemplate: "______ { game } from './game.js';",
+        codeSolution: "import { game } from './game.js';",
+        codeRegex: /import\s+\{\s*game\s*\}\s+from/
     },
     { 
-        name: "Interfaces", 
-        keyword: "interface", 
-        kidExpl: "An Interface is a rule book. It says what something MUST do.",
-        memoryTip: "Like the rules of a game.",
-        codeTask: "Create an interface named `Playable`.",
-        codeTemplate: "______ Playable {}",
-        codeSolution: "interface Playable {}",
-        codeRegex: /interface\s+Playable/
+        name: "LocalStorage", 
+        keyword: "localStorage", 
+        kidExpl: "Save data in the browser so it stays there when you come back.",
+        memoryTip: "Like a backpack for your data.",
+        codeTask: "Save 'score' as '100'.",
+        codeTemplate: "localStorage.setItem('score', '100');",
+        codeSolution: "localStorage.setItem('score', '100');",
+        codeRegex: /localStorage\.setItem/
     },
     { 
-        name: "Lists", 
-        keyword: "ArrayList", 
-        kidExpl: "An ArrayList is a bag of items. You can add or take away items anytime.",
-        memoryTip: "Like a shopping list.",
-        codeTask: "Create a list of text named `names`.",
-        codeTemplate: "ArrayList<String> names = new ______<>();",
-        codeSolution: "ArrayList<String> names = new ArrayList<>();",
-        codeRegex: /ArrayList\s*<\s*String\s*>\s*names\s*=\s*new\s+ArrayList\s*<\s*>\s*\(\s*\)\s*;/
-    },
-    { 
-        name: "Streams", 
-        keyword: "stream", 
-        kidExpl: "Streams help us find specific things in a big pile.",
-        memoryTip: "Like picking only the red candies from a bowl.",
-        codeTask: "Use stream to filter items from `data`.",
-        codeTemplate: "data.stream().______(x -> x > 5);",
-        codeSolution: "data.stream().filter(x -> x > 5);",
-        codeRegex: /data\.stream\(\)\.filter/
-    },
-    { 
-        name: "Exceptions", 
+        name: "Error Handling", 
         keyword: "try", 
-        kidExpl: "Exceptions are safety nets. They catch errors so the program doesn't crash.",
-        memoryTip: "Like wearing a helmet.",
-        codeTask: "Wrap the code in a try-catch block.",
-        codeTemplate: "______ {\n    danger();\n} catch (Exception e) {}",
-        codeSolution: "try {\n    danger();\n} catch (Exception e) {}",
-        codeRegex: /try\s*\{.*\}\s*catch/s
+        kidExpl: "We use `try` and `catch` to handle errors without crashing.",
+        memoryTip: "Try to do it, catch if it falls.",
+        codeTask: "Start a try block.",
+        codeTemplate: "______ { dangerousCode(); } catch(e) {}",
+        codeSolution: "try { dangerousCode(); } catch(e) {}",
+        codeRegex: /try\s*\{/
     },
     { 
-        name: "File I/O", 
-        keyword: "Files", 
-        kidExpl: "This lets us save our work to a file on the computer.",
-        memoryTip: "Like saving your game progress.",
-        codeTask: "Write \"Hi\" to \"test.txt\".",
-        codeTemplate: "Files.writeString(Path.of(\"test.txt\"), \"Hi\");",
-        codeSolution: "Files.writeString(Path.of(\"test.txt\"), \"Hi\");",
-        codeRegex: /Files\.writeString/
+        name: "Math Object", 
+        keyword: "Math", 
+        kidExpl: "The Math object has tools for numbers, like random numbers.",
+        memoryTip: "Math class helper.",
+        codeTask: "Get a random number.",
+        codeTemplate: "Math.random();",
+        codeSolution: "Math.random();",
+        codeRegex: /Math\.random/
+    },
+    {
+        name: "Canvas Setup",
+        keyword: "getContext",
+        kidExpl: "The Canvas is like a piece of paper on the screen where we can draw.",
+        memoryTip: "Get the context to start drawing.",
+        codeTask: "Get the 2D drawing tool.",
+        codeTemplate: "const ctx = canvas.______('2d');",
+        codeSolution: "const ctx = canvas.getContext('2d');",
+        codeRegex: /\.getContext\s*\(\s*['"]2d['"]\s*\)/
+    },
+    {
+        name: "Drawing Shapes",
+        keyword: "fillRect",
+        kidExpl: "We can draw rectangles instantly.",
+        memoryTip: "Fill a Rectangle.",
+        codeTask: "Draw a square at 0,0.",
+        codeTemplate: "ctx.______(0, 0, 50, 50);",
+        codeSolution: "ctx.fillRect(0, 0, 50, 50);",
+        codeRegex: /\.fillRect\s*\(/
+    },
+    {
+        name: "Colors",
+        keyword: "fillStyle",
+        kidExpl: "We can change the color of our paintbrush.",
+        memoryTip: "Style of the Fill.",
+        codeTask: "Set color to red.",
+        codeTemplate: "ctx.______ = 'red';",
+        codeSolution: "ctx.fillStyle = 'red';",
+        codeRegex: /\.fillStyle\s*=\s*['"]red['"]/
+    },
+    {
+        name: "Drawing Lines",
+        keyword: "lineTo",
+        kidExpl: "Connect dots to make lines.",
+        memoryTip: "Draw a line TO here.",
+        codeTask: "Draw a line to 100, 100.",
+        codeTemplate: "ctx.______(100, 100);",
+        codeSolution: "ctx.lineTo(100, 100);",
+        codeRegex: /\.lineTo\s*\(/
+    },
+    {
+        name: "Game Animation",
+        keyword: "requestAnimationFrame",
+        kidExpl: "This tells the browser to update the game picture smoothly.",
+        memoryTip: "Request a new Frame for Animation.",
+        codeTask: "Loop the game.",
+        codeTemplate: "______(gameLoop);",
+        codeSolution: "requestAnimationFrame(gameLoop);",
+        codeRegex: /requestAnimationFrame/
+    },
+    {
+        name: "Keyboard Input",
+        keyword: "key",
+        kidExpl: "Check which key the player pressed.",
+        memoryTip: "The key to the door.",
+        codeTask: "Check if Space was pressed.",
+        codeTemplate: "if (event.______ === ' ')",
+        codeSolution: "if (event.key === ' ')",
+        codeRegex: /\.key\s*===/
+    },
+    {
+        name: "Game Images",
+        keyword: "drawImage",
+        kidExpl: "Draw pictures (sprites) into your game.",
+        memoryTip: "Draw the Image.",
+        codeTask: "Draw an image at 0,0.",
+        codeTemplate: "ctx.______(heroImg, 0, 0);",
+        codeSolution: "ctx.drawImage(heroImg, 0, 0);",
+        codeRegex: /\.drawImage\s*\(/
+    },
+    {
+        name: "Game Sound",
+        keyword: "Audio",
+        kidExpl: "Play sounds in your game.",
+        memoryTip: "Audio player.",
+        codeTask: "Create a new sound.",
+        codeTemplate: "const sfx = new ______('jump.mp3');",
+        codeSolution: "const sfx = new Audio('jump.mp3');",
+        codeRegex: /new\s+Audio\s*\(/
+    },
+    {
+        name: "Collision Logic",
+        keyword: "&&",
+        kidExpl: "Check if two things are touching (overlapping). We use AND (&&) to check multiple sides.",
+        memoryTip: "This AND that must be true.",
+        codeTask: "Check if x > 10 AND x < 20.",
+        codeTemplate: "if (x > 10 ______ x < 20)",
+        codeSolution: "if (x > 10 && x < 20)",
+        codeRegex: /&&/
     }
 ];
 
@@ -361,23 +558,23 @@ const curriculum = [];
 let learnedTopics = [
     { 
         name: "Basics", 
-        keyword: "System.out", 
+        keyword: "console.log", 
         kidExpl: "We tell the computer to write text.", 
-        memoryTip: "System.out is the screen.",
+        memoryTip: "Log it to the console.",
         codeTask: "Write code to print \"Hi\".",
-        codeTemplate: "System.out.println(______);",
-        codeSolution: "System.out.println(\"Hi\");",
-        codeRegex: /System\.out\.println\s*\(\s*"Hi"\s*\)\s*;/
+        codeTemplate: "console.log(______);",
+        codeSolution: "console.log(\"Hi\");",
+        codeRegex: /console\.log\s*\(\s*"Hi"\s*\)\s*;?/
     },
     { 
         name: "Variables", 
-        keyword: "int", 
+        keyword: "let", 
         kidExpl: "We store information in boxes.", 
-        memoryTip: "int = integer box.",
+        memoryTip: "Let x be 10.",
         codeTask: "Create a box named `x` with 10 inside.",
-        codeTemplate: "int x = ______;",
-        codeSolution: "int x = 10;",
-        codeRegex: /int\s+x\s*=\s*10\s*;/
+        codeTemplate: "let x = ______;",
+        codeSolution: "let x = 10;",
+        codeRegex: /let\s+x\s*=\s*10\s*;?/
     },
     { 
         name: "Logic", 
@@ -386,8 +583,8 @@ let learnedTopics = [
         memoryTip: "if this, then that.",
         codeTask: "Check if `x` is 10.",
         codeTemplate: "if (______) {}",
-        codeSolution: "if (x == 10) {}",
-        codeRegex: /if\s*\(\s*x\s*==\s*10\s*\)/
+        codeSolution: "if (x === 10) {}",
+        codeRegex: /if\s*\(\s*x\s*===\s*10\s*\)/
     }
 ]; 
 
@@ -417,7 +614,7 @@ const addRandomSteps = (lessonSteps, topic) => {
         const stepType = Math.random() > 0.5 ? 'quiz' : 'code';
         
         if (stepType === 'quiz') {
-            const baseOptions = ["int", "if", "void", "boolean", "String", "class"];
+            const baseOptions = ["let", "if", "function", "const", "=>", "class"];
             const filtered = baseOptions.filter(o => o !== topic.keyword);
             const randomOpts = filtered.sort(() => 0.5 - Math.random()).slice(0, 3);
             randomOpts.push(topic.keyword);
@@ -528,6 +725,53 @@ proceduralTopics.forEach((topic, index) => {
     addRandomSteps(lesson3.steps, topic);
     newChapter.lessons.push(lesson3);
 
+    // Lesson 4: Common Mistakes (New)
+    const lesson4 = {
+        id: `l-proc-${index}-4`,
+        title: `Common Mistakes: ${topic.name}`,
+        steps: [
+            {
+                type: "theory",
+                content: `Be careful! Here is a common mistake when using **${topic.name}**.`
+            },
+            {
+                type: "quiz",
+                question: `Which one is CORRECT for ${topic.name}?`,
+                options: [
+                    `Using ${topic.keyword} correctly`,
+                    `Misspelling ${topic.keyword}`,
+                    `Forgetting brackets`,
+                    `Using the wrong symbol`
+                ],
+                correct: 0,
+                explanation: `Always double check your spelling of \`${topic.keyword}\`.`
+            }
+        ]
+    };
+    addRandomSteps(lesson4.steps, topic);
+    newChapter.lessons.push(lesson4);
+
+    // Lesson 5: Advanced Challenge (New)
+    const lesson5 = {
+        id: `l-proc-${index}-5`,
+        title: `Mastering ${topic.name}`,
+        steps: [
+            {
+                type: "theory",
+                content: `You are doing great! Let's try one more challenge to master **${topic.name}**.`
+            },
+            {
+                type: "code",
+                instruction: `Prove your skill. ${topic.codeTask}`,
+                initial: "", // No help this time!
+                solution: topic.codeSolution,
+                checkRegex: topic.codeRegex
+            }
+        ]
+    };
+    addRandomSteps(lesson5.steps, topic);
+    newChapter.lessons.push(lesson5);
+
     // Add to curriculum
     curriculum.push(newChapter);
     learnedTopics.push(topic);
@@ -553,10 +797,10 @@ curriculum.push({
                 },
                 {
                     type: "code",
-                    instruction: "Create a void update method.",
-                    initial: "void update() { }",
-                    solution: "void update() { }",
-                    checkRegex: /void\s+update\s*\(\s*\)\s*\{\s*\}/
+                    instruction: "Create a function named update.",
+                    initial: "function update() { }",
+                    solution: "function update() { }",
+                    checkRegex: /function\s+update\s*\(\s*\)\s*\{\s*\}/
                 }
             ]
         }
@@ -565,15 +809,18 @@ curriculum.push({
 
 // --- Post-Process: Expand Core Chapters ---
 const coreExpansionMap = {
-    "l1-1": { name: "Commands", keyword: ";", codeTask: "Write a command.", codeTemplate: "System.out.println(\"A\");", codeSolution: "System.out.println(\"A\");", codeRegex: /;/ },
-    "l1-2": { name: "Variables", keyword: "int", codeTask: "Make a box.", codeTemplate: "int box = 1;", codeSolution: "int box = 1;", codeRegex: /int/ },
+    "l1-1": { name: "Commands", keyword: ";", codeTask: "Write a command.", codeTemplate: "console.log(\"A\");", codeSolution: "console.log(\"A\");", codeRegex: /;/ },
+    "l1-1b": { name: "Comments", keyword: "//", codeTask: "Write a comment.", codeTemplate: "// Note", codeSolution: "// Note", codeRegex: /\/\// },
+    "l1-2": { name: "Variables", keyword: "let", codeTask: "Make a box.", codeTemplate: "let box = 1;", codeSolution: "let box = 1;", codeRegex: /let/ },
+    "l1-2b": { name: "Math", keyword: "+", codeTask: "Add numbers.", codeTemplate: "1 + 1", codeSolution: "1 + 1", codeRegex: /\+/ },
+    "l1-2c": { name: "Booleans", keyword: "true", codeTask: "Write true.", codeTemplate: "true", codeSolution: "true", codeRegex: /true/ },
     "l1-3": { name: "Concatenation", keyword: "+", codeTask: "Use + to join text.", codeTemplate: "\"A\" + \"B\"", codeSolution: "\"A\" + \"B\"", codeRegex: /\+/ },
-    "l3-0": { name: "Loops", keyword: "for", codeTask: "Write a loop.", codeTemplate: "for(int i=0;i<5;i++){}", codeSolution: "for(int i=0;i<5;i++){}", codeRegex: /for/ },
-    "l3-1": { name: "Loops", keyword: "for", codeTask: "Write a loop.", codeTemplate: "for(int i=0;i<5;i++){}", codeSolution: "for(int i=0;i<5;i++){}", codeRegex: /for/ },
-    "l3-2": { name: "for-each", keyword: ":", codeTask: "Use ':' keyword.", codeTemplate: "for(String s : list)", codeSolution: "for(String s : list)", codeRegex: /:/ },
-    "l3-3": { name: "Counting", keyword: "for", codeTask: "Count numbers.", codeTemplate: "for(int i=0;i<5;i++)", codeSolution: "for(int i=0;i<5;i++)", codeRegex: /for/ },
-    "l3-4": { name: "while", keyword: "while", codeTask: "Write a while loop.", codeTemplate: "while(true){}", codeSolution: "while(true){}", codeRegex: /while/ },
-    "l3-5": { name: "Loops", keyword: "for", codeTask: "Loop through names.", codeTemplate: "for(String n : names){}", codeSolution: "for(String n : names){}", codeRegex: /for/ },
+    "l3-0": { name: "Logic", keyword: "if", codeTask: "Write an if statement.", codeTemplate: "if(true){}", codeSolution: "if(true){}", codeRegex: /if/ },
+    "l3-0b": { name: "Else", keyword: "else", codeTask: "Write else.", codeTemplate: "else {}", codeSolution: "else {}", codeRegex: /else/ },
+    "l3-1": { name: "Loops", keyword: "for", codeTask: "Write a loop.", codeTemplate: "for(let i=0;i<5;i++){}", codeSolution: "for(let i=0;i<5;i++){}", codeRegex: /for/ },
+    "l3-1b": { name: "While", keyword: "while", codeTask: "Write a while loop.", codeTemplate: "while(true){}", codeSolution: "while(true){}", codeRegex: /while/ },
+    "l3-2": { name: "for-of", keyword: "of", codeTask: "Use 'of' keyword.", codeTemplate: "for(const s of list)", codeSolution: "for(const s of list)", codeRegex: /of/ },
+    "l3-2b": { name: "Break", keyword: "break", codeTask: "Stop a loop.", codeTemplate: "break;", codeSolution: "break;", codeRegex: /break/ }
 };
 
 curriculum.forEach(chapter => {

@@ -43,7 +43,7 @@ const app = {
 
     loadState: function() {
         try {
-            const saved = localStorage.getItem('javalearnState');
+            const saved = localStorage.getItem('jslearnState');
             const CURRENT_VERSION = "1.2"; // Increment this to reset progress
 
             if (saved) {
@@ -72,13 +72,13 @@ const app = {
         } catch (e) {
             console.error("Error loading state:", e);
             // Reset state on error
-            localStorage.removeItem('javalearnState');
+            localStorage.removeItem('jslearnState');
             this.state.version = "1.2";
         }
     },
 
     saveState: function() {
-        localStorage.setItem('javalearnState', JSON.stringify(this.state));
+        localStorage.setItem('jslearnState', JSON.stringify(this.state));
         this.updateStats();
     },
 
@@ -109,11 +109,11 @@ const app = {
         container.innerHTML = '';
 
         const videos = [
-            { title: "Java for Beginners", desc: "Learn the basics in 10 minutes.", img: "https://img.youtube.com/vi/eIrMbAQSU34/mqdefault.jpg", url: "https://www.youtube.com/watch?v=eIrMbAQSU34" },
-            { title: "Variables Explained", desc: "What are int, String, and boolean?", img: "https://img.youtube.com/vi/GTThM51d02o/mqdefault.jpg", url: "https://www.youtube.com/watch?v=GTThM51d02o" },
-            { title: "Loops in Java", desc: "How to repeat code easily.", img: "https://img.youtube.com/vi/6d657r5aV5I/mqdefault.jpg", url: "https://www.youtube.com/watch?v=6d657r5aV5I" },
-            { title: "Object Oriented Programming", desc: "Classes and Objects made simple.", img: "https://img.youtube.com/vi/P2W049ww5xk/mqdefault.jpg", url: "https://www.youtube.com/watch?v=P2W049ww5xk" },
-            { title: "Java Game Development", desc: "Make your first game!", img: "https://img.youtube.com/vi/1gir2R7G9ws/mqdefault.jpg", url: "https://www.youtube.com/watch?v=1gir2R7G9ws" }
+            { title: "JavaScript for Beginners", desc: "Learn JS in 1 hour.", img: "https://img.youtube.com/vi/W6NZfCO5SIk/mqdefault.jpg", url: "https://www.youtube.com/watch?v=W6NZfCO5SIk" },
+            { title: "Variables (let vs const)", desc: "Understanding variables.", img: "https://img.youtube.com/vi/XgSjoHgy3Rk/mqdefault.jpg", url: "https://www.youtube.com/watch?v=XgSjoHgy3Rk" },
+            { title: "JavaScript Loops", desc: "For, While, and For...Of loops.", img: "https://img.youtube.com/vi/s9wW2PpJsmQ/mqdefault.jpg", url: "https://www.youtube.com/watch?v=s9wW2PpJsmQ" },
+            { title: "DOM Manipulation", desc: "Change the website with code!", img: "https://img.youtube.com/vi/y17RuWkWDN8/mqdefault.jpg", url: "https://www.youtube.com/watch?v=y17RuWkWDN8" },
+            { title: "Async JavaScript", desc: "Promises and Async/Await.", img: "https://img.youtube.com/vi/PoRJizFvM7s/mqdefault.jpg", url: "https://www.youtube.com/watch?v=PoRJizFvM7s" }
         ];
 
         videos.forEach(v => {
@@ -248,7 +248,7 @@ const app = {
             let html = step.content
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/`(.*?)`/g, '<code style="background:#eee;padding:2px 4px;border-radius:4px;color:#d63384">$1</code>')
-                .replace(/```java([\s\S]*?)```/g, '<div class="code-block">$1</div>')
+                .replace(/```(javascript|js)([\s\S]*?)```/g, '<div class="code-block">$2</div>')
                 .replace(/\n/g, '<br>');
             
             box.innerHTML = html;
@@ -320,7 +320,8 @@ const app = {
                 // Show full solution if available, otherwise partial solution
                 const solutionText = step.fullSolution ? step.fullSolution : step.solution;
                 const explanation = step.explanation ? `\n\nWhy? ${step.explanation}` : "";
-                message = `Not quite. Here is the correct code:\n\n${solutionText}${explanation}`;
+                // Wrap solution in triple backticks to preserve formatting
+                message = `Not quite. Here is the correct code:\n\n\`\`\`javascript\n${solutionText}\n\`\`\`${explanation}`;
             }
         }
 
@@ -348,11 +349,26 @@ const app = {
             feedbackArea.className = 'feedback-area wrong';
             feedbackTitle.innerText = "Incorrect";
             
-            // Format message to hide backticks and show styled code
-            let formatted = message
-                .replace(/</g, "&lt;").replace(/>/g, "&gt;")
-                .replace(/`(.*?)`/g, '<span style="font-weight:bold; font-family:Consolas, monospace;">$1</span>')
-                .replace(/\n/g, '<br>');
+            // 1. Escape HTML
+            let safeMsg = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            
+            // 2. Extract code blocks to prevent processing backticks inside them
+            const codeBlocks = [];
+            safeMsg = safeMsg.replace(/```(javascript|js)?([\s\S]*?)```/g, (match, lang, code) => {
+                codeBlocks.push(code);
+                return `__CODE_BLOCK_${codeBlocks.length - 1}__`;
+            });
+
+            // 3. Process inline backticks
+            safeMsg = safeMsg.replace(/`(.*?)`/g, '<span style="font-weight:bold; font-family:Consolas, monospace;">$1</span>');
+
+            // 4. Restore code blocks with a lighter, cleaner style
+            safeMsg = safeMsg.replace(/__CODE_BLOCK_(\d+)__/g, (match, index) => {
+                return `<div style="background: rgba(255,255,255,0.9); color: #333; padding: 10px; border-radius: 8px; font-family: Consolas, monospace; margin: 10px 0; white-space: pre-wrap; border: 2px solid rgba(0,0,0,0.1); text-align: left;">${codeBlocks[index]}</div>`;
+            });
+
+            // 5. Newlines
+            let formatted = safeMsg.replace(/\n/g, '<br>');
             
             feedbackMsg.innerHTML = formatted;
             this.state.hearts = Math.max(0, this.state.hearts - 1);
@@ -405,19 +421,19 @@ const app = {
 
         // --- 1. Symbol Dictionary ---
         const symbolHeader = document.createElement('h3');
-        symbolHeader.innerText = "Java Symbol Dictionary";
+        symbolHeader.innerText = "JavaScript Symbol Dictionary";
         container.appendChild(symbolHeader);
 
         const symbols = [
-            { sym: ";", name: "The End Mark", desc: "Like a period in a sentence. It tells the computer 'I am done with this line'." },
-            { sym: "=", name: "The Giver", desc: "Gives a value to a box. `int x = 5` puts 5 into box x." },
-            { sym: "==", name: "The Asker", desc: "Asks a question. `if (x == 5)` asks 'Is x equal to 5?'" },
-            { sym: "()", name: "Round Brackets", desc: "Used for instructions (Methods) or grouping math." },
-            { sym: "{}", name: "Curly Brackets", desc: "Holds a block of code together. Like a container for actions." },
-            { sym: ".", name: "The Dot", desc: "Opens a box to see what's inside. `System.out.println` means 'Look inside System, then out, then find println'." },
-            { sym: '""', name: "Double Quotes", desc: "Wraps text so the computer knows it is words, not code." },
-            { sym: "[]", name: "Square Brackets", desc: "Used for Arrays (Lists). It's like a tray with slots." },
-            { sym: "//", name: "Comment", desc: "The computer ignores this line. It is a note for humans." }
+            { sym: ";", name: "The End Mark", desc: "Tells the computer 'I am done with this line'. Optional in JS, but good practice." },
+            { sym: "=", name: "The Giver", desc: "Gives a value to a box. `let x = 5` puts 5 into box x." },
+            { sym: "===", name: "The Strict Asker", desc: "Asks if two things are EXACTLY the same. `if (x === 5)`" },
+            { sym: "()", name: "Round Brackets", desc: "Used for functions `console.log()` or grouping math." },
+            { sym: "{}", name: "Curly Brackets", desc: "Holds a block of code together (Functions, Ifs, Loops)." },
+            { sym: ".", name: "The Dot", desc: "Accesses a property. `console.log` means 'Look inside console for log'." },
+            { sym: "[]", name: "Square Brackets", desc: "Used for Arrays (Lists). `[1, 2, 3]`" },
+            { sym: "//", name: "Comment", desc: "The computer ignores this line. It is a note for humans." },
+            { sym: "=>", name: "Arrow", desc: "Used for Arrow Functions. A shorter way to write functions." }
         ];
 
         const symbolGrid = document.createElement('div');
@@ -431,7 +447,7 @@ const app = {
             card.className = 'explanation-box';
             card.style.margin = '0'; // Override default margin
             card.innerHTML = `
-                <div style="font-size: 24px; color: #58cc02; font-weight: bold; margin-bottom: 5px;">${item.sym}</div>
+                <div style="font-size: 24px; color: #f7df1e; font-weight: bold; margin-bottom: 5px; text-shadow: 1px 1px 0 #000;">${item.sym}</div>
                 <div style="font-weight: bold; margin-bottom: 5px;">${item.name}</div>
                 <div style="font-size: 14px; color: #555;">${item.desc}</div>
             `;
@@ -491,34 +507,39 @@ const app = {
         
         consoleOut.innerText = "> Running...\n";
 
-        // Very basic simulation
+        // Capture console.log
+        const originalLog = console.log;
+        let output = "";
+        
+        console.log = function(...args) {
+            // Convert args to string
+            const line = args.map(arg => {
+                if (typeof arg === 'object') return JSON.stringify(arg);
+                return String(arg);
+            }).join(' ');
+            output += line + "\n";
+        };
+
         try {
-            const lines = code.split('\n');
-            let output = "";
-            
-            lines.forEach(line => {
-                if (line.trim().startsWith('System.out.println')) {
-                    const match = line.match(/System\.out\.println\s*\(\s*"(.*?)"\s*\)/);
-                    if (match) {
-                        output += match[1] + "\n";
-                    } else {
-                        // Try to handle variables? Too complex for regex only.
-                        // Just echo raw if it looks like a print
-                        output += "[Output] " + line + "\n";
-                    }
-                }
-            });
+            // Execute the code safely
+            // We wrap it in a function to allow 'return' if needed, though not strictly necessary for simple scripts
+            const runUserCode = new Function(code);
+            runUserCode();
 
             if (output === "") {
-                output = "Program finished with no output (or syntax not supported in playground simulation).";
+                output = "Program finished with no output. (Did you forget console.log?)";
             }
 
+        } catch (e) {
+            output += `\n❌ Error: ${e.name}\n${e.message}`;
+            // Optional: Add line number if possible (stack trace parsing is complex in browser)
+        } finally {
+            // Restore console.log
+            console.log = originalLog;
+            
             setTimeout(() => {
                 consoleOut.innerText += output;
-            }, 500);
-
-        } catch (e) {
-            consoleOut.innerText += "Error: " + e.message;
+            }, 100);
         }
     }
 };
